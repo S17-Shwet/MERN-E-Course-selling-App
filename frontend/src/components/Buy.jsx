@@ -22,16 +22,16 @@ function Buy() {
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
-  if (!token) {
-    // setError("Please login to purchase the courses");
-    navigate("/login");
-  }
+  // if (!token) {
+  //   // setError("Please login to purchase the courses");
+  //   navigate("/login");
+  // }
   useEffect(() => {
     const fetchBuyCourseData = async () => {
-      // if (!token) {
-
-      //   return;
-      // }
+      if (!token) {
+        navigate("/login");
+        return;
+      }
       try {
         // setLoading(true);
         const response = await axios.post(
@@ -62,7 +62,7 @@ function Buy() {
       }
     };
     fetchBuyCourseData();
-  }, [courseId]);
+  }, [courseId, token, navigate]);
 
   const handlePurchase = async (event) => {
     event.preventDefault();
@@ -119,7 +119,7 @@ function Buy() {
       setCardError(confirmError.message);
     } else if (paymentIntent.status === "succeeded") {
       console.log("Payment succeeded:", paymentIntent);
-      setCardError('Your payment ID: $"{paymentIntent.id}');
+      setCardError(`Your payment ID: ${paymentIntent.id}`);
       const paymentInfo = {
         email: user?.user?.email,
         userId: user.user._id,

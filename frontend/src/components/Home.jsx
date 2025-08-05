@@ -52,7 +52,7 @@ function Home() {
       setIsLoggedIn(false);
     } catch (error) {
       console.log("Error is Logging out", error);
-      toast.error(error.response.data.errors || "Error in logging out");
+      toast.error(error?.response?.data?.errors || "Error in logging out");
     }
   };
 

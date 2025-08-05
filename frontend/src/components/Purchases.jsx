@@ -12,7 +12,7 @@ import { BACKEND_URL } from "../utils/utils";
 function Purchases() {
   const [purchases, setPurchase] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -29,17 +29,18 @@ function Purchases() {
       setIsLoggedIn(false);
     }
   }, []);
-  if (!token) {
-    navigate("/login");
-  }
+  // if (!token) {
+  //   navigate("/login");
+  // }
   // Fetch purchases
   useEffect(() => {
     // const user = JSON.parse(localStorage.getItem("user"));
     // const token = user.token;
-    // if (!token) {
-    //   toast.error("Please login to purchase the courses");
-    //   return;
-    // }
+    if (!token) {
+      toast.error("Please login to purchase the courses");
+      navigate("/login");
+      return;
+    }
     const fetchPurchases = async () => {
       // if (!token) {
       //   setErrorMessage("Please login to purchase the courses");
@@ -63,7 +64,7 @@ function Purchases() {
       }
     };
     fetchPurchases();
-  }, []);
+  }, [token, navigate]);
 
   // Logout
   const handleLogout = async () => {
