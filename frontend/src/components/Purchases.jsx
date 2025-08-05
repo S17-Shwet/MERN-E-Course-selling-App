@@ -34,17 +34,17 @@ function Purchases() {
   }
   // Fetch purchases
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const token = user.token;
+    // const user = JSON.parse(localStorage.getItem("user"));
+    // const token = user.token;
     // if (!token) {
     //   toast.error("Please login to purchase the courses");
     //   return;
     // }
     const fetchPurchases = async () => {
-      if (!token) {
-        setErrorMessage("Please login to purchase the courses");
-        return;
-      }
+      // if (!token) {
+      //   setErrorMessage("Please login to purchase the courses");
+      //   return;
+      // }
       try {
         const response = await axios.get(
           `${BACKEND_URL}/user/purchases`,
