@@ -1,4 +1,4 @@
-import Admin from "../models/admin.model.js";
+import {Admin }from "../models/admin.model.js";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import jwt from "jsonwebtoken";
@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
   }
 
   try {
-    const existingAdmin = await Admin.findOne({ email });
+    const existingAdmin = await Admin.findOne({email: email });
     if (existingAdmin) {
       return res.status(400).json({ errors: "Admin already exists" });
     }
@@ -92,7 +92,13 @@ export const logout=(req,res)=>
     {
         return res.status(401).json({errors: "Kindly login first"});
     }
-   res.clearCookie("jwt");
+   res.clearCookie("jwt",
+    {
+      httpOnly: true,
+      sameSite:"Strict",
+      secure:process.env.NODE_ENV==="production",
+    }
+   );
   res.status(200).json({message: "Logged out successfully"});
  } catch (error) {
   res.status(500).json({errors:"Error in logout"});

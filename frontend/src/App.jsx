@@ -41,7 +41,13 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
           path="/admin/dashboard"
-          element={admin ? <Dashboard /> : <Navigate to={"/admin/login"} />}
+          element={
+            localStorage.getItem("admin") ? (
+              <Dashboard />
+            ) : (
+              <Navigate to={"/admin/login"} />
+            )
+          }
         />
         <Route path="/admin/create-course" element={<CourseCreate />} />
         <Route path="/admin/update-course/:id" element={<UpdateCourse />} />

@@ -46,8 +46,8 @@ function Buy() {
         );
         console.log(response.data);
 
-        // toast.success(response.data.message || "Course purchased successfully");
-        // navigate("/purchases");
+        toast.success(response.data.message || "Course purchased successfully");
+        navigate("/purchases");
         setCourse(response.data.course);
         setClientSecret(response.data.clientSecret);
         setLoading(false);
