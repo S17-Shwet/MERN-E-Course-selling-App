@@ -47,7 +47,7 @@ function Purchases() {
       }
       try {
         const response = await axios.get(
-          "http://localhost:4001/api/v1/user/purchases",
+          `${BACKEND_URL}/user/purchases`,
           // {},
           {
             headers: {
