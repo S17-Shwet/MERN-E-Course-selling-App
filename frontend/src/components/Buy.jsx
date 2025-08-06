@@ -22,10 +22,10 @@ function Buy() {
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
-  // if (!token) {
-  //   // setError("Please login to purchase the courses");
-  //   navigate("/login");
-  // }
+  if (!token) {
+    // setError("Please login to purchase the courses");
+    navigate("/login");
+  }
   useEffect(() => {
     const fetchBuyCourseData = async () => {
       if (!token) {

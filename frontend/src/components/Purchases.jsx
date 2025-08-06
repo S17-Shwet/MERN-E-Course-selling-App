@@ -34,8 +34,8 @@ function Purchases() {
   // }
   // Fetch purchases
   useEffect(() => {
-    // const user = JSON.parse(localStorage.getItem("user"));
-    // const token = user.token;
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.token;
     if (!token) {
       toast.error("Please login to purchase the courses");
       navigate("/login");
@@ -64,7 +64,7 @@ function Purchases() {
       }
     };
     fetchPurchases();
-  }, [token, navigate]);
+  }, []);
 
   // Logout
   const handleLogout = async () => {
