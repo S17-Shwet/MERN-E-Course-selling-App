@@ -8,6 +8,14 @@ import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const admin = localStorage.getItem("admin");
+    if (!admin) {
+      navigate("/admin/login");
+    }
+  }, [navigate]);
+
   const handleLogout = async () => {
     try {
       const response = await axios.get(`${BACKEND_URL}/admin/logout`, {
