@@ -28,10 +28,10 @@ function Buy() {
   }
   useEffect(() => {
     const fetchBuyCourseData = async () => {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
+      // if (!token) {
+      //   navigate("/login");
+      //   return;
+      // }
       try {
         // setLoading(true);
         const response = await axios.post(
@@ -46,8 +46,8 @@ function Buy() {
         );
         console.log(response.data);
 
-        toast.success(response.data.message || "Course purchased successfully");
-        navigate("/purchases");
+        // toast.success(response.data.message || "Course purchased successfully");
+        // navigate("/purchases");
         setCourse(response.data.course);
         setClientSecret(response.data.clientSecret);
         setLoading(false);
@@ -62,7 +62,7 @@ function Buy() {
       }
     };
     fetchBuyCourseData();
-  }, [courseId, token, navigate]);
+  }, [courseId]);
 
   const handlePurchase = async (event) => {
     event.preventDefault();
