@@ -4,8 +4,10 @@ import logo from "../../public/logo.webp";
 import axios from "axios";
 import { BACKEND_URL } from "../utils/utils";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       const response = await axios.get(`${BACKEND_URL}/admin/logout`, {
@@ -13,7 +15,7 @@ function Dashboard() {
       });
       toast.success(response.data.message);
       localStorage.removeItem("admin");
-      window.location.href = "/admin/login";
+      navigate("/admin/login");
     } catch (error) {
       console.log("Error in logging out ", error);
       toast.error(error?.response?.data?.errors || "Error in logging out");
